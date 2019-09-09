@@ -1,5 +1,6 @@
-# Grove - 3-Axis Digital Accelerometer ±2g to 16g (LIS3DHTR)
-
+# Seeed_Arduino_LIS3DHTR
+## Introduction 
+An Arduino library for 3-Axis Digital Accelerometer ±2g to 16g (LIS3DHTR).
 ## Usage
     1.Git clone this resp to your Arduino IDE's libraries directory.
     2.Run the demo "LIS3DHTR_Example" on examples directory.
