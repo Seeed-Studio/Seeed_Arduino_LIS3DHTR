@@ -43,7 +43,7 @@ LIS3DHTR<T>::LIS3DHTR(void)
 }
 
 template<class T>
-void LIS3DHTR<T>::begin(T &wire = Wire, uint8_t address = LIS3DHTR_DEFAULT_ADDRESS)
+void LIS3DHTR<T>::begin(T &wire, uint8_t address)
 {
     _Wire = &wire;
     _Wire->begin();
@@ -319,7 +319,7 @@ void LIS3DHTR<T>::read(uint8_t reg, uint8_t *buf, uint16_t len)
 }
 
 template<class T>
-LIS3DHTR<T>::operator bool() const { return isConnection(); }
+LIS3DHTR<T>::operator bool()  { return isConnection(); }
 
 
 #ifdef SOFTWAREWIRE

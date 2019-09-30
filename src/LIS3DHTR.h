@@ -221,7 +221,7 @@ class LIS3DHTR
         uint8_t getDeviceID(void);
         
         void reset(void);
-        operator bool() const; 
+        operator bool(); 
     private:
     
         void write8(uint8_t reg, uint8_t val);
