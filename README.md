@@ -1,9 +1,9 @@
 # Seeed_Arduino_LIS3DHTR
 ## Introduction 
-An Arduino library for 3-Axis Digital Accelerometer ±2g to 16g (LIS3DHTR).
+An Arduino library for 3-Axis Digital Accelerometer ±2g to 16g (LIS3DHTR).Acceleration data can be obtained using IIC interface and SPI interface.
 ## Usage
     1.Git clone this resp to your Arduino IDE's libraries directory.
-    2.Run the demo "LIS3DHTR_Example" on examples directory.
+    2.Run the demo "LIS3DHTR_IIC" or "LIS3DHTR_SPI" on examples directory.
 
 ----
 
@@ -21,4 +21,3 @@ global distributors and partners to push open hardware movement.<br>
 
 
 [![Analytics](https://ga-beacon.appspot.com/UA-46589105-3/grove-human-presence-sensor)](https://github.com/igrigorik/ga-beacon)
-

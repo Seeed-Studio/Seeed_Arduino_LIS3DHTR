@@ -29,7 +29,7 @@
 #else
 #include "WProgram.h"
 #endif
-//#define SOFTWAREWIRE
+// #define SOFTWAREWIRE
 #ifdef SOFTWAREWIRE
   #include <SoftwareWire.h>
 #else   
@@ -40,6 +40,11 @@
 #ifndef SEEED_LIS3DHTR_H
 #define SEEED_LIS3DHTR_H
 
+/**************************************************************************
+    commInterface
+**************************************************************************/
+#define I2C_MODE 0
+#define SPI_MODE 1
 
 /**************************************************************************
     I2C ADDRESS/BITS
@@ -199,15 +204,15 @@ template <class T>
 class LIS3DHTR
 {
     public:
-        LIS3DHTR(void);
+        LIS3DHTR(uint8_t busType);
 
         bool isConnection(void);
 
-        void begin(T &wire = Wire, uint8_t address = LIS3DHTR_DEFAULT_ADDRESS);
+        void begin(T &wire = Wire, uint8_t address = LIS3DHTR_ADDRESS_UPDATED);//初始化
 
-        void begin(uint8_t address);
+        void begin(uint8_t sspin);
 
-        void setPoweMode(power_type_t mode);
+        void setPoweMode(power_type_t mode);    
         void setFullScaleRange(scale_type_t range);
         void setOutputDataRate(odr_type_t odr);
         
@@ -215,6 +220,14 @@ class LIS3DHTR
         float getAccelerationX(void);
         float getAccelerationY(void);
         float getAccelerationZ(void);
+        void click(uint8_t c, uint8_t click_thresh, uint8_t limit=10, uint8_t latency=20, uint8_t window=255) ;
+        
+        void openTemp();
+        void closeTemp();
+
+        uint16_t readbitADC1(void);
+        uint16_t readbitADC2(void);
+        uint16_t readbitADC3(void);
         
         int16_t getTemperature(void);
         
@@ -229,9 +242,14 @@ class LIS3DHTR
         uint16_t read16(uint8_t reg);
         uint32_t read24(uint8_t reg);
         void read(uint8_t reg, uint8_t *buf, uint16_t len);
-        
+        void readRegisterRegion(uint8_t *outputPointer , uint8_t offset, uint8_t length);
+        void writeRegister(uint8_t reg, uint8_t val);
+        uint8_t readRegister(uint8_t reg);
+        uint16_t readRegisterInt16(uint8_t reg );
         uint8_t devAddr;
         int16_t accRange;
+        uint8_t commInterface;
+        uint8_t chipSelectPin;
         T *_Wire;
     
 };
