@@ -1,7 +1,7 @@
 // This example shows the 3 axis acceleration.
 
 #include "LIS3DHTR.h"
-LIS3DHTR<TwoWire> LIS(SPI_MODE); //SPI
+LIS3DHTR<TwoWire> LIS; //SPI
 void setup()
 {
   Serial.begin(115200);
