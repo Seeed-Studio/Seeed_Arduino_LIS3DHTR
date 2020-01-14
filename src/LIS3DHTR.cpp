@@ -12,7 +12,7 @@
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
+ * copies of the Software, and to permit persons to whom the Software istm
  * furnished to do so, subject to the following conditions:
  * 
  * The above copyright notice and this permission notice shall be included in
@@ -143,9 +143,8 @@ void LIS3DHTR<T>::closeTemp()
 template <class T>
 int16_t LIS3DHTR<T>::getTemperature(void)
 {
-
     int16_t result = ((int16_t)readRegisterInt16(0x0c)) / 256;
-
+    result += 25;
     return result;
 }
 
@@ -431,7 +430,7 @@ void LIS3DHTR<T>::click(uint8_t c, uint8_t click_thresh, uint8_t limit, uint8_t 
 {
     if (!c)
     {
-        uint8_t r = read8(LIS3DHTR_REG_ACCEL_CTRL_REG3);
+        uint8_t r = readRegister(LIS3DHTR_REG_ACCEL_CTRL_REG3);
         r &= ~(0x80); // turn off I1_CLICK
         writeRegister(LIS3DHTR_REG_ACCEL_CTRL_REG3, r);
         writeRegister(LIS3DHTR_REG_ACCEL_CLICK_CFG, 0);
