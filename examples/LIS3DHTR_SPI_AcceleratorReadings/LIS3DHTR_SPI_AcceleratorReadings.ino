@@ -1,6 +1,7 @@
 // This example shows the 3 axis acceleration.
 
 #include "LIS3DHTR.h"
+<<<<<<< HEAD
 LIS3DHTR<TwoWire> LIS(SPI_MODE); //SPI
 void setup() {
     Serial.begin(115200);
@@ -19,6 +20,27 @@ void setup() {
     //  LIS.setOutputDataRate(LIS3DHTR_DATARATE_200HZ);
     //  LIS.setOutputDataRate(LIS3DHTR_DATARATE_1_6KHZ);
     //  LIS.setOutputDataRate(LIS3DHTR_DATARATE_5KHZ);
+=======
+LIS3DHTR<TwoWire> LIS; //SPI
+void setup()
+{
+  Serial.begin(115200);
+  while (!Serial);
+  LIS.begin(10); //SPI SS/CS
+  delay(100);
+  //  LIS.setFullScaleRange(LIS3DHTR_RANGE_2G);
+  //  LIS.setFullScaleRange(LIS3DHTR_RANGE_4G);
+  //  LIS.setFullScaleRange(LIS3DHTR_RANGE_8G);
+  //  LIS.setFullScaleRange(LIS3DHTR_RANGE_16G);
+  //  LIS.setOutputDataRate(LIS3DHTR_DATARATE_1HZ);
+  //  LIS.setOutputDataRate(LIS3DHTR_DATARATE_10HZ);
+  //  LIS.setOutputDataRate(LIS3DHTR_DATARATE_25HZ);
+  LIS.setOutputDataRate(LIS3DHTR_DATARATE_50HZ);
+  //  LIS.setOutputDataRate(LIS3DHTR_DATARATE_100HZ);
+  //  LIS.setOutputDataRate(LIS3DHTR_DATARATE_200HZ);
+  //  LIS.setOutputDataRate(LIS3DHTR_DATARATE_1_6KHZ);
+  //  LIS.setOutputDataRate(LIS3DHTR_DATARATE_5KHZ);
+>>>>>>> beta
 }
 void loop() {
     if (!LIS) {
