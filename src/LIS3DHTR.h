@@ -30,15 +30,9 @@
     #include "WProgram.h"
 #endif
 
-//#define LIS_SPI_MODE
-
-#ifdef LIS_SPI_MODE
-#include <SPI.h>
-#elif defined SOFTWAREWIRE
-#include <SoftwareWire.h>
-#else
 #include <Wire.h>
-#endif
+#include <SPI.h>
+
 
 #ifndef SEEED_LIS3DHTR_H
 #define SEEED_LIS3DHTR_H
@@ -200,13 +194,11 @@ public:
     LIS3DHTR();
 
     bool isConnection(void);
-#ifdef LIS_SPI_MODE
-    void begin(T &comm = SPI, uint8_t sspin = SS); //init
-    void begin(uint8_t sspin) { begin(SPI, sspin); };
-#else
-    void begin(T &comm = Wire, uint8_t address = LIS3DHTR_DEFAULT_ADDRESS); //init
+
+    void begin(SPIClass &comm = SPI, uint8_t sspin = SS); //init
+    void begin(TwoWire &comm = Wire, uint8_t address = LIS3DHTR_DEFAULT_ADDRESS); //init
     void begin(uint8_t address) { begin(Wire, address); };
-#endif
+
 
     void setPoweMode(power_type_t mode);
     void setFullScaleRange(scale_type_t range);
@@ -242,7 +234,8 @@ private:
     int16_t accRange;
     uint8_t commInterface;
     uint8_t chipSelectPin;
-    T *_comm;
+    SPIClass *_spi_com;
+    TwoWire *_wire_com;
 };
 
 #endif /*SEEED_LIS3DHTR_H*/

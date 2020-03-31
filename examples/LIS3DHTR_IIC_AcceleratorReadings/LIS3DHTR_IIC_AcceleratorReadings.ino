@@ -1,18 +1,8 @@
 // This example shows the 3 axis acceleration.
-// if you use the software I2C to drive the sensor, you can uncommnet the define SOFTWAREWIRE which in LIS3DHTR.h.
-
 #include "LIS3DHTR.h"
-#ifdef SOFTWAREWIRE
-  #include <SoftwareWire.h>
-  SoftwareWire myWire(3, 2);
-  LIS3DHTR<SoftwareWire> LIS;//IIC
-  #define WIRE myWire
-#else
-  #include <Wire.h>
-  LIS3DHTR<TwoWire> LIS;//IIC
-  #define WIRE Wire
-#endif
-
+#include <Wire.h>
+LIS3DHTR<TwoWire> LIS; //IIC
+#define WIRE Wire
 
 void setup() {
     Serial.begin(115200);
