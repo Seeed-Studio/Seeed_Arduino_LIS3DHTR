@@ -6,7 +6,7 @@ void setup()
 {
   Serial.begin(115200);
   while (!Serial);
-  LIS.begin(10); //SPI SS/CS
+  LIS.begin(SPI, 10); //SPI SS/CS
   delay(100);
   //  LIS.setFullScaleRange(LIS3DHTR_RANGE_2G);
   //  LIS.setFullScaleRange(LIS3DHTR_RANGE_4G);

@@ -7,7 +7,7 @@ void setup()
 {
   Serial.begin(115200);
   while (!Serial);
-  LIS.begin(10); //SPI SS/CS
+  LIS.begin(SPI, 10); //SPI SS/CS
   LIS.openTemp();////If ADC3 is used, the temperature detection needs to be turned off.
   //  LIS.closeTemp();//default
   delay(100);
