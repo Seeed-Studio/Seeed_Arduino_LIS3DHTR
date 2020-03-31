@@ -3,16 +3,6 @@
 
 #include "LIS3DHTR.h"
 #ifdef SOFTWAREWIRE
-<<<<<<< HEAD
-    #include <SoftwareWire.h>
-    SoftwareWire myWire(3, 2);
-    LIS3DHTR<SoftwareWire> LIS(I2C_MODE);//IIC
-    #define WIRE myWire
-#else
-    #include <Wire.h>
-    LIS3DHTR<TwoWire> LIS(I2C_MODE);//IIC
-    #define WIRE Wire
-=======
   #include <SoftwareWire.h>
   SoftwareWire myWire(3, 2);
   LIS3DHTR<SoftwareWire> LIS;//IIC
@@ -21,7 +11,6 @@
   #include <Wire.h>
   LIS3DHTR<TwoWire> LIS;//IIC
   #define WIRE Wire
->>>>>>> beta
 #endif
 
 
