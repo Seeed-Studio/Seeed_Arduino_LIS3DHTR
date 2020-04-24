@@ -159,6 +159,8 @@
 #define LIS3DHTR_REG_ACCEL_CTRL_REG4_SIM_4WIRE (0x00) // 4-Wire Interface
 #define LIS3DHTR_REG_ACCEL_CTRL_REG4_SIM_3WIRE (0x01) // 3-Wire Interface
 
+#define LIS3DHTR_REG_ACCEL_STATUS2_UPDATE_MASK (0x08)   // Has New Data Flag Mask
+
 enum power_type_t // power mode
 {
     POWER_MODE_NORMAL = LIS3DHTR_REG_ACCEL_CTRL_REG1_LPEN_NORMAL,
@@ -203,7 +205,7 @@ public:
     void setPoweMode(power_type_t mode);
     void setFullScaleRange(scale_type_t range);
     void setOutputDataRate(odr_type_t odr);
-
+    bool available();
     void getAcceleration(float *x, float *y, float *z);
     float getAccelerationX(void);
     float getAccelerationY(void);

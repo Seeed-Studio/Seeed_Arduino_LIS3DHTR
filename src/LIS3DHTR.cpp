@@ -81,7 +81,7 @@ void LIS3DHTR<T>::begin(SPIClass &comm, uint8_t sspin)
     delay(LIS3DHTR_CONVERSIONDELAY);
 
     setFullScaleRange(LIS3DHTR_RANGE_16G);
-    setOutputDataRate(LIS3DHTR_DATARATE_1HZ);
+    setOutputDataRate(LIS3DHTR_DATARATE_400HZ);
 }
 
 template <class T>
@@ -118,7 +118,16 @@ void LIS3DHTR<T>::begin(TwoWire &wire, uint8_t address)
     delay(LIS3DHTR_CONVERSIONDELAY);
 
     setFullScaleRange(LIS3DHTR_RANGE_16G);
-    setOutputDataRate(LIS3DHTR_DATARATE_1HZ);
+    setOutputDataRate(LIS3DHTR_DATARATE_400HZ);
+}
+
+template<class T>
+bool LIS3DHTR<T>::available()
+{
+    uint8_t status = 0;
+    status = readRegister(LIS3DHTR_REG_ACCEL_STATUS2);
+    status &= LIS3DHTR_REG_ACCEL_STATUS2_UPDATE_MASK;
+    return status;
 }
 
 template <class T>
