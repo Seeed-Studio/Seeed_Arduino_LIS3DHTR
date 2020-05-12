@@ -7,7 +7,8 @@ LIS3DHTR<TwoWire> LIS; //IIC
 void setup() {
     Serial.begin(115200);
     while (!Serial) {};
-    LIS.begin(WIRE); //IIC init
+    LIS.begin(WIRE); //IIC init dafault :0x18
+    //LIS.begin(WIRE, 0x19); //IIC init
     delay(100);
     //  LIS.setFullScaleRange(LIS3DHTR_RANGE_2G);
     //  LIS.setFullScaleRange(LIS3DHTR_RANGE_4G);
@@ -21,6 +22,7 @@ void setup() {
     //  LIS.setOutputDataRate(LIS3DHTR_DATARATE_200HZ);
     //  LIS.setOutputDataRate(LIS3DHTR_DATARATE_1_6KHZ);
     //  LIS.setOutputDataRate(LIS3DHTR_DATARATE_5KHZ);
+    LIS.setHighSolution(true); //High solution enable
 }
 void loop() {
     if (!LIS) {

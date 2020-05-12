@@ -10,7 +10,8 @@ void setup()
   while (!Serial)
   {
   };
-  LIS.begin(WIRE); //IIC init
+  LIS.begin(WIRE); //IIC init dafault :0x18
+  //LIS.begin(WIRE, 0x19); //IIC init
   LIS.openTemp();  //If ADC3 is used, the temperature detection needs to be turned off.
   //  LIS.closeTemp();//default
   delay(100);
@@ -26,6 +27,7 @@ void setup()
   //  LIS.setOutputDataRate(LIS3DHTR_DATARATE_200HZ);
   //  LIS.setOutputDataRate(LIS3DHTR_DATARATE_1_6KHZ);
   //  LIS.setOutputDataRate(LIS3DHTR_DATARATE_5KHZ);
+  LIS.setHighSolution(true); //High solution enable
 }
 void loop()
 {
