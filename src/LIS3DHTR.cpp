@@ -171,7 +171,7 @@ uint8_t LIS3DHTR<T>::getDeviceID(void)
 }
 
 template <class T>
-void LIS3DHTR<T>::setPoweMode(power_type_t mode)
+void LIS3DHTR<T>::setPowerMode(power_type_t mode)
 {
     uint8_t data = 0;
 

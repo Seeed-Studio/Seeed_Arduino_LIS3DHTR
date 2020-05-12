@@ -202,7 +202,7 @@ public:
     void begin(uint8_t address) { begin(Wire, address); };
 
 
-    void setPoweMode(power_type_t mode);
+    void setPowerMode(power_type_t mode);
     void setFullScaleRange(scale_type_t range);
     void setOutputDataRate(odr_type_t odr);
     void setHighSolution(bool enable);
