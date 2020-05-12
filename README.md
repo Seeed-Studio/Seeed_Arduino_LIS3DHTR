@@ -44,17 +44,126 @@ void loop()
 
 ## API Reference
 
-- **begin(*comm\<TwoWire\>, address\<uint8_t\>=0x18*)** :  Init device
+- **begin(*comm\<TwoWire\>, address\<uint8_t\>=0x18*) : void**
 ```C++
+// Init device by IIC
 LIS3DHTR<TwoWire> LIS; //IIC
 LIS.begin(Wire, 0x19)
 ```
 
-- **begin(*comm\<SPIClass\>, sspin\<uint8_t\>=SS*)** :  Init device
+- **begin(*comm\<SPIClass\>, sspin\<uint8_t\>=SS*) : void** 
 ```C++
+// Init device by SPI
 LIS3DHTR<SPIClass> LIS; //SPI
 LIS.begin(SPI, 10); //SPI SS/CS
 ```
+
+- **setPoweMode(*mode\<power_type_t\>*) : void**
+```C++
+// Set power mode
+LIS.setPoweMode(POWER_MODE_NORMAL); // Normal mode
+LIS.setPoweMode(POWER_MODE_LOW); // Low power mode
+```
+
+- **setFullScaleRange(*range\<scale_type_t\>*) : void**
+```C++
+// Set Full scale
+LIS.setFullScaleRange(LIS3DHTR_RANGE_2G); // 2G
+LIS.setFullScaleRange(LIS3DHTR_RANGE_4G); // 4G
+LIS.setFullScaleRange(LIS3DHTR_RANGE_8G); // 8G
+LIS.setFullScaleRange(LIS3DHTR_RANGE_16G); // 16G
+```
+
+- **setOutputDataRate(*odr\<odr_type_t\>*) : void**
+```C++
+// Set output data rate
+LIS.setOutputDataRate(LIS3DHTR_DATARATE_POWERDOWN); // Power down
+LIS.setOutputDataRate(LIS3DHTR_DATARATE_1HZ); // 1HZ
+LIS.setOutputDataRate(LIS3DHTR_DATARATE_10HZ); // 10HZ
+LIS.setOutputDataRate(LIS3DHTR_DATARATE_25HZ); // 25HZ
+LIS.setOutputDataRate(LIS3DHTR_DATARATE_50HZ); // 50HZ
+LIS.setOutputDataRate(LIS3DHTR_DATARATE_100HZ); // 100HZ
+LIS.setOutputDataRate(LIS3DHTR_DATARATE_200HZ); // 200HZ
+LIS.setOutputDataRate(LIS3DHTR_DATARATE_400HZ); // 400HZ
+LIS.setOutputDataRate(LIS3DHTR_DATARATE_1_6KH); // 1.6kHZ
+LIS.setOutputDataRate(LIS3DHTR_DATARATE_5KHZ); // 5KHZ
+```
+
+- **available(*void*) : bool**
+```C++
+// if new data
+if(LIS.available){
+  float x = LIS.getAccelerationX();
+}
+```
+
+- **getAcceleration(*x\<float \*\>, y\<float \*\>, z\<float \*\>*) : void**
+```C++
+// get acceleration
+float x, y, z;
+LIS.getAcceleration(&x, &y, &z);
+```
+
+- **getAccelerationX(*void*) : float**
+```C++
+// get acceleration x
+float x = LIS.getAccelerationX();
+```
+
+- **getAccelerationY(*void*) : float**
+```C++
+// get acceleration y
+float y = LIS.getAccelerationY();
+```
+
+- **getAccelerationY(*void*) : float**
+```C++
+// get acceleration z
+float Z = LIS.getAccelerationZ();
+```
+
+- **getTemperature(*void*) : int16_t**
+```C++
+// get temperature, you need to execute LIS.openTemp() before get temperature
+int16_t temp = LIS.getTemperature();
+```
+
+- **openTemp(*void*) : void**
+```C++
+// open temperature enable
+LIS.openTemp();
+```
+
+- **closeTemp(*void*) : void**
+```C++
+// close temperature enable
+LIS.closeTemp();
+```
+
+- **readbitADC1(*void*) : uint16_t**
+```C++
+// read ADC1
+uint16_t adc1 = LIS.readbitADC1();
+```
+
+- **readbitADC2(*void*) : uint16_t**
+```C++
+// read ADC2
+uint16_t adc2 = LIS.readbitADC2();
+```
+
+- **readbitADC3(*void*) : uint16_t**
+```C++
+// read ADC3
+uint16_t adc3 = LIS.readbitADC3();
+```
+
+- **reset(*void*) : void**
+```C++
+// reset device
+LIS.reset();
+```
+
 
 ----
 ## License

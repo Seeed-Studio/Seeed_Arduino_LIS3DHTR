@@ -2,7 +2,7 @@ LIS3DHTR	KEYWORD1
 
 isConnection	KEYWORD2
 begin	KEYWORD2
-setPoweMode	KEYWORD2
+setPowerMode	KEYWORD2
 setFullScaleRange	KEYWORD2
 setOutputDataRate	KEYWORD2
 setHighSolution	KEYWORD2
