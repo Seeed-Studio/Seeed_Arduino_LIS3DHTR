@@ -72,7 +72,7 @@ void LIS3DHTR<T>::begin(SPIClass &comm, uint8_t sspin)
 
     uint8_t config4 = LIS3DHTR_REG_ACCEL_CTRL_REG4_BDU_NOTUPDATED | // Continuous Update
                       LIS3DHTR_REG_ACCEL_CTRL_REG4_BLE_LSB |        // Data LSB @ lower address
-                      LIS3DHTR_REG_ACCEL_CTRL_REG4_HS_ENABLE |      // High Resolution Disable
+                      LIS3DHTR_REG_ACCEL_CTRL_REG4_HS_DISABLE |      // High Resolution Disable
                       LIS3DHTR_REG_ACCEL_CTRL_REG4_ST_NORMAL |      // Normal Mode
                       LIS3DHTR_REG_ACCEL_CTRL_REG4_SIM_4WIRE;       // 4-Wire Interface
 
@@ -315,6 +315,18 @@ float LIS3DHTR<T>::getAccelerationZ(void)
     z = (int16_t)((zAccelHi << 8) | zAccelLo);
 
     return (float)z / accRange;
+}
+
+template <class T>
+void LIS3DHTR<T>::setHighSolution(bool enable)
+{
+    uint8_t data = 0;
+    data = readRegister(LIS3DHTR_REG_ACCEL_CTRL_REG4);
+   
+    data = enable? data | LIS3DHTR_REG_ACCEL_CTRL_REG4_HS_ENABLE : data & ~LIS3DHTR_REG_ACCEL_CTRL_REG4_HS_ENABLE;
+    
+    writeRegister(LIS3DHTR_REG_ACCEL_CTRL_REG4, data);
+    return; 
 }
 
 template <class T>
