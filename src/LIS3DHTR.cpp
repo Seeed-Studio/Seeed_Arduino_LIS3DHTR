@@ -234,32 +234,18 @@ template <class T>
 void LIS3DHTR<T>::getAcceleration(float *x, float *y, float *z)
 {
     // Read the Accelerometer
-    uint8_t xAccelLo, xAccelHi, yAccelLo, yAccelHi, zAccelLo, zAccelHi;
+    uint8_t buf[8]={0};
 
     // Read the Data
-    // Reading the Low X-Axis Acceleration Data Register
-    xAccelLo = readRegister(LIS3DHTR_REG_ACCEL_OUT_X_L);
-    // Reading the High X-Axis Acceleration Data Register
-    xAccelHi = readRegister(LIS3DHTR_REG_ACCEL_OUT_X_H);
+    readRegisterRegion(buf,LIS3DHTR_REG_ACCEL_OUT_X_L,6);
+
     // Conversion of the result
     // 16-bit signed result for X-Axis Acceleration Data of LIS3DHTR
-    *x = (float)((int16_t)((xAccelHi << 8) | xAccelLo)) / accRange;
-
-    // Reading the Low Y-Axis Acceleration Data Register
-    yAccelLo = readRegister(LIS3DHTR_REG_ACCEL_OUT_Y_L);
-    // Reading the High Y-Axis Acceleration Data Register
-    yAccelHi = readRegister(LIS3DHTR_REG_ACCEL_OUT_Y_H);
-    // Conversion of the result
+    *x = (float)((int16_t*)buf)[0] / accRange;
     // 16-bit signed result for Y-Axis Acceleration Data of LIS3DHTR
-    *y = (float)((int16_t)((yAccelHi << 8) | yAccelLo)) / accRange;
-
-    // Reading the Low Z-Axis Acceleration Data Register
-    zAccelLo = readRegister(LIS3DHTR_REG_ACCEL_OUT_Z_L);
-    // Reading the High Z-Axis Acceleration Data Register
-    zAccelHi = readRegister(LIS3DHTR_REG_ACCEL_OUT_Z_H);
-    // Conversion of the result
+    *y = (float)((int16_t*)buf)[1] / accRange;
     // 16-bit signed result for Z-Axis Acceleration Data of LIS3DHTR
-    *z = (float)((int16_t)((zAccelHi << 8)) | zAccelLo) / accRange;
+    *z = (float)((int16_t*)buf)[2] / accRange;
 }
 
 template <class T>
