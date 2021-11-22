@@ -43,16 +43,15 @@ void LIS3DHTR<T>::begin(SPIClass &comm, uint8_t sspin)
     _wire_com = NULL;
     pinMode(chipSelectPin, OUTPUT);
     digitalWrite(chipSelectPin, HIGH);
-    // start the SPI library:
-    _spi_com->begin();
-    // Maximum SPI frequency is 10MHz, could divide by 2 here:
-    _spi_com->setClockDivider(SPI_CLOCK_DIV4);
-    // Data is read and written MSb first.
-    _spi_com->setBitOrder(MSBFIRST);
+
+    // Maximum SPI frequency is 10MHz, Data is read and written MSb first,
     // Data is captured on rising edge of clock (CPHA = 0)
     // Base value of the clock is HIGH (CPOL = 1)
     // MODE3 for 328p operation
-    _spi_com->setDataMode(SPI_MODE3);
+    SPISettings _settings(10000000, MSBFIRST, SPI_MODE3);
+
+    // start the SPI library:
+    _spi_com->begin();
 
     delay(200);
 
@@ -363,10 +362,12 @@ void LIS3DHTR<T>::writeRegister(uint8_t reg, uint8_t val)
 {
     if (_spi_com != NULL)
     {
+        _spi_com->beginTransaction(_settings);
         digitalWrite(chipSelectPin, LOW);
         _spi_com->transfer(reg);
         _spi_com->transfer(val);
         digitalWrite(chipSelectPin, HIGH);
+        _spi_com->endTransaction();
     }
     else
     {
@@ -388,6 +389,7 @@ void LIS3DHTR<T>::readRegisterRegion(uint8_t *outputPointer, uint8_t reg, uint8_
 
     if (_spi_com != NULL)
     {
+        _spi_com->beginTransaction(_settings);
         digitalWrite(chipSelectPin, LOW);
         _spi_com->transfer(reg | 0x80 | 0x40); //Ored with "read request" bit and "auto increment" bit
         while (i < length)                     // slave may send less than requested
@@ -398,6 +400,7 @@ void LIS3DHTR<T>::readRegisterRegion(uint8_t *outputPointer, uint8_t reg, uint8_
             i++;
         }
         digitalWrite(chipSelectPin, HIGH);
+        _spi_com->endTransaction();        
     }
     else
     {

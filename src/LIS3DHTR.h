@@ -238,6 +238,7 @@ private:
     uint8_t commInterface;
     uint8_t chipSelectPin;
     SPIClass *_spi_com;
+    SPISettings _settings;
     TwoWire *_wire_com;
 };
 
