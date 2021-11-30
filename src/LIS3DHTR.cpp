@@ -385,7 +385,6 @@ void LIS3DHTR<T>::readRegisterRegion(uint8_t *outputPointer, uint8_t reg, uint8_
     //define pointer that will point to the external space
     uint8_t i = 0;
     uint8_t c = 0;
-    uint8_t tempFFCounter = 0;
 
     if (_spi_com != NULL)
     {
