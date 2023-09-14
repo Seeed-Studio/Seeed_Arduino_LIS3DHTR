@@ -471,6 +471,44 @@ void LIS3DHTR<T>::click(uint8_t c, uint8_t click_thresh, uint8_t limit, uint8_t 
 }
 
 template <class T>
+void LIS3DHTR<T>::getIntStatus(uint8_t *flag)
+{
+    *flag = readRegister(LIS3DHTR_REG_ACCEL_INT1_SRC);
+}
+
+template <class T>
+void LIS3DHTR<T>::setInterrupt(void)
+{
+    uint8_t data = 0;
+    uint8_t config1 = LIS3DHTR_REG_ACCEL_CTRL_REG1_AODR_50 |
+                      LIS3DHTR_REG_ACCEL_CTRL_REG1_LPEN_NORMAL | // Normal Mode
+                      LIS3DHTR_REG_ACCEL_CTRL_REG1_AZEN_ENABLE | // Acceleration Z-Axis Enabled
+                      LIS3DHTR_REG_ACCEL_CTRL_REG1_AYEN_ENABLE | // Acceleration Y-Axis Enabled
+                      LIS3DHTR_REG_ACCEL_CTRL_REG1_AXEN_ENABLE;
+    writeRegister(LIS3DHTR_REG_ACCEL_CTRL_REG1, config1);  // (50 Hz),  X/Y/Z-axis enable
+
+    writeRegister(LIS3DHTR_REG_ACCEL_CTRL_REG2, 0x00);  // 
+
+    uint8_t config3 = LIS3DHTR_CTRL_REG3_IA1_ENABLE; 
+    writeRegister(LIS3DHTR_REG_ACCEL_CTRL_REG3, config3);  // IA1 interrupt
+
+    setFullScaleRange(LIS3DHTR_RANGE_2G);
+
+    writeRegister(LIS3DHTR_REG_ACCEL_CTRL_REG5, 0x00);  // Latch interrupt request 
+
+    writeRegister(LIS3DHTR_REG_ACCEL_CTRL_REG6, 0x42);  // IA1, active-low  Enable interrupt 1 function on INT2 pin
+
+	writeRegister(LIS3DHTR_REG_ACCEL_INT1_THS,0x5D);    //set Threshold，2g =>16mg/LSB，4g => 32mg/LSB，8g => 62mg/LSB，16g => 186mg/LSB
+
+	writeRegister(LIS3DHTR_REG_ACCEL_INT1_DURATION,0); 
+
+    data = readRegister(LIS3DHTR_REG_ACCEL_INT1_SRC);     //clear interrupt flag
+
+	writeRegister(LIS3DHTR_REG_ACCEL_INT1_CFG,0x2a);        //trigger when ZHIE/YHIE/XHIE
+
+}
+
+template <class T>
 LIS3DHTR<T>::operator bool() { return isConnection(); }
 
 template class LIS3DHTR<SPIClass>;
