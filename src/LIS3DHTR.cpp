@@ -503,6 +503,7 @@ void LIS3DHTR<T>::setInterrupt(void)
 	writeRegister(LIS3DHTR_REG_ACCEL_INT1_DURATION,0); 
 
     data = readRegister(LIS3DHTR_REG_ACCEL_INT1_SRC);     //clear interrupt flag
+    (void)data; // UNUSED
 
 	writeRegister(LIS3DHTR_REG_ACCEL_INT1_CFG,0x2a);        //trigger when ZHIE/YHIE/XHIE
 
