@@ -492,13 +492,13 @@ void LIS3DHTR<T>::setInterrupt(void)
     uint8_t config3 = LIS3DHTR_CTRL_REG3_IA1_ENABLE; 
     writeRegister(LIS3DHTR_REG_ACCEL_CTRL_REG3, config3);  // IA1 interrupt
 
-    setFullScaleRange(LIS3DHTR_RANGE_2G);
+    setFullScaleRange(LIS3DHTR_RANGE_8G);
 
     writeRegister(LIS3DHTR_REG_ACCEL_CTRL_REG5, 0x00);  // Latch interrupt request 
 
     writeRegister(LIS3DHTR_REG_ACCEL_CTRL_REG6, 0x42);  // IA1, active-low  Enable interrupt 1 function on INT2 pin
 
-	writeRegister(LIS3DHTR_REG_ACCEL_INT1_THS,0x5D);    //set Threshold，2g =>16mg/LSB，4g => 32mg/LSB，8g => 62mg/LSB，16g => 186mg/LSB
+	writeRegister(LIS3DHTR_REG_ACCEL_INT1_THS,0x50);    //set Threshold，2g =>16mg/LSB，4g => 32mg/LSB，8g => 62mg/LSB，16g => 186mg/LSB
 
 	writeRegister(LIS3DHTR_REG_ACCEL_INT1_DURATION,0); 
 
