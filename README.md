@@ -1,4 +1,4 @@
-# Seeed_Arduino_LIS3DHTR  [![](https://travis-ci.com/Seeed-Studio/Seeed_Arduino_LIS3DHTR.svg?branch=master)](https://travis-ci.com/Seeed-Studio/Seeed_Arduino_LIS3DHTR)
+# Seeed_Arduino_LIS3DHTR  [Build Status](https://travis-ci.com/Seeed-Studio/Seeed_Arduino_LIS3DHTR)
 ## Introduction 
 An Arduino library for 3-Axis Digital Accelerometer ±2g to 16g (LIS3DHTR).Acceleration data can be obtained using IIC interface and SPI interface.
 ## How to install  Arduino Library
